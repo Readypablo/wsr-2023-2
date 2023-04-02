@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 28 2023 г., 13:36
--- Версия сервера: 8.0.30
+-- Время создания: Апр 02 2023 г., 16:40
+-- Версия сервера: 5.7.39-log
 -- Версия PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `user` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `role` varchar(150) NOT NULL,
   `smena_start` date NOT NULL,
   `smena_end` date NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `user` (
   `password` varchar(150) NOT NULL,
   `name` varchar(150) NOT NULL,
   `surname` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `user`
@@ -44,8 +44,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `role`, `smena_start`, `smena_end`, `phone`, `password`, `name`, `surname`) VALUES
 (1, 'Администратор', '2023-03-01', '2023-03-02', '78456123', '123456', 'Олег', 'Наимов'),
-(2, 'Официант', '2023-03-01', '2023-03-02', '712365489', '123321', 'Ильяс', 'Вакилов'),
-(3, 'Повар', '2023-03-01', '2023-03-02', '894561237', '321321', 'артем', 'Расулович');
+(2, 'Официант', '2023-04-19', '2023-04-29', '712365489', '123321', 'Ильяс', 'Вакилов'),
+(3, 'Повар', '2023-03-01', '2023-03-02', '894561237', '321321', 'артем', 'Расулович'),
+(4, 'Администратор', '2023-03-01', '2023-03-02', '321123321', '112233', 'сергей', 'куков');
 
 -- --------------------------------------------------------
 
@@ -54,18 +55,20 @@ INSERT INTO `user` (`id`, `role`, `smena_start`, `smena_end`, `phone`, `password
 --
 
 CREATE TABLE `zakaz` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `status` varchar(25) NOT NULL,
   `info` varchar(500) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `date` datetime NOT NULL,
+  `status_oplata` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `zakaz`
 --
 
-INSERT INTO `zakaz` (`id`, `status`, `info`, `date`) VALUES
-(1, 'Готовится', 'пиво креветки чипсы', '2023-03-01 15:13:42');
+INSERT INTO `zakaz` (`id`, `status`, `info`, `date`, `status_oplata`) VALUES
+(1, 'Готов', 'пиво креветки чипсы', '2023-03-01 15:13:42', ''),
+(31, 'Готовится', 'кортошка с сыром и соком и чисы', '2023-04-14 18:35:00', 'Оплачен');
 
 --
 -- Индексы сохранённых таблиц
@@ -91,13 +94,13 @@ ALTER TABLE `zakaz`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `zakaz`
 --
 ALTER TABLE `zakaz`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
